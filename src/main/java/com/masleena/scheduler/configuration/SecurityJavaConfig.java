@@ -2,14 +2,17 @@ package com.masleena.scheduler.configuration;
 
 import com.masleena.scheduler.security.MySavedRequestAwareAuthenticationSuccessHandler;
 import com.masleena.scheduler.security.RestAuthenticationEntryPoint;
+import com.masleena.scheduler.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
@@ -23,14 +26,14 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MySavedRequestAwareAuthenticationSuccessHandler mySuccessHandler;
 
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
+
     private SimpleUrlAuthenticationFailureHandler myFailureHandler = new SimpleUrlAuthenticationFailureHandler();
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(encoder().encode("adminPass")).roles("ADMIN")
-                .and()
-                .withUser("user").password(encoder().encode("userPass")).roles("USER");
+        auth.authenticationProvider(authProvider());
     }
 
     @Override
@@ -42,7 +45,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/getAllTasks").authenticated()
-                .antMatchers("/insertTask").hasRole("ADMIN")
+                .antMatchers("/insertTask").hasRole("USER")
                 .and()
                 .formLogin().loginPage("/login")
                 .successHandler(mySuccessHandler)
@@ -53,6 +56,14 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(myUserDetailsService);
+        authenticationProvider.setPasswordEncoder(encoder());
+        return authenticationProvider;
     }
 }
