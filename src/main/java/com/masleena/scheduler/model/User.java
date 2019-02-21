@@ -1,25 +1,23 @@
 package com.masleena.scheduler.model;
 
-import java.util.List;
-
 public class User {
     private String id;
+    private String username;
     private String firstName;
     private String lastName;
     private String password;
     private String email;
-    private List<String> roles;
 
     public User() {
     }
 
-    public User(String id, String firstName, String lastName, String password, String email, List<String> roles) {
+    public User(String id, String username, String firstName, String lastName, String password, String email) {
         this.id = id;
+        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.email = email;
-        this.roles = roles;
     }
 
     public String getId() {
@@ -28,6 +26,14 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -62,23 +68,15 @@ public class User {
         this.email = email;
     }
 
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> role) {
-        this.roles = role;
-    }
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
+        final StringBuffer sb = new StringBuffer("User{");
         sb.append("id='").append(id).append('\'');
+        sb.append(", username='").append(username).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", roles=").append(roles);
         sb.append('}');
         return sb.toString();
     }

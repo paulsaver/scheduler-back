@@ -10,4 +10,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     User findByEmail(@Param("email") String email);
 
+    User findByUsername(@Param("username") String username);
+
 }

@@ -1,8 +1,9 @@
 package com.masleena.scheduler.controller;
 
 import com.masleena.scheduler.model.User;
-import com.masleena.scheduler.service.impl.UserService;
+import com.masleena.scheduler.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,11 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @PostMapping("/register")
     public @ResponseBody
-    User register(@RequestBody User user){
-        return userService.registerNewUserAccount(user);
+    String register(@RequestBody User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "OK";
     }
 }
