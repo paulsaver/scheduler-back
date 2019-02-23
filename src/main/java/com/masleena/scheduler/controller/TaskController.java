@@ -1,32 +1,40 @@
 package com.masleena.scheduler.controller;
 
 import com.masleena.scheduler.model.Task;
+import com.masleena.scheduler.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.masleena.scheduler.repositories.TaskRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class TaskController {
 
-    private final TaskRepository taskRepository;
-
     @Autowired
-    public TaskController(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    private TaskService taskService;
 
     @GetMapping("/getAllTasks")
     public @ResponseBody
-    List<Task> getAllTasks(){
-        return taskRepository.findAll();
+    List<Task> getAllTasks() {
+        return taskService.getAllTasks();
     }
 
     @PostMapping("/insertTask")
-    public String insertTask(@RequestBody Task task) {
-        taskRepository.save(task);
-        return task.getId();
+    public @ResponseBody
+    Task insertTask(@RequestBody Task task) {
+        return taskService.insertTask(task);
+    }
+
+    @GetMapping("/deleteTask")
+    public @ResponseBody
+    String deleteTask(@RequestParam("id") String id){
+        taskService.deleteTask(id);
+        return "OK";
+    }
+
+    @PostMapping("editTask")
+    public @ResponseBody
+    Task editTask(@RequestBody Task task){
+        return taskService.editTask(task);
     }
 }
