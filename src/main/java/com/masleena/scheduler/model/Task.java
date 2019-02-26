@@ -1,6 +1,7 @@
 package com.masleena.scheduler.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -12,6 +13,10 @@ public class Task {
     private String id;
     private String header;
     private String description;
+    @DBRef
+    private TaskStatus taskStatus;
+    @DBRef
+    private TaskList taskList;
     private String owner;
     private Date dueDate;
 
@@ -19,10 +24,12 @@ public class Task {
     public Task() {
     }
 
-    public Task(String id, String header, String description, String owner, Date dueDate) {
+    public Task(String id, String header, String description, TaskStatus taskStatus, TaskList taskList, String owner, Date dueDate) {
         this.id = id;
         this.header = header;
         this.description = description;
+        this.taskStatus = taskStatus;
+        this.taskList = taskList;
         this.owner = owner;
         this.dueDate = dueDate;
     }
@@ -56,6 +63,22 @@ public class Task {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public String getOwner() {
