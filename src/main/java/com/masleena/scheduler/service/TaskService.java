@@ -8,7 +8,7 @@ public interface TaskService {
 
     List<Task> getAllTasks();
 
-    Task insertTask(Task task);
+    Task createTask(Task task);
 
     void deleteTask(String id);
 

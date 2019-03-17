@@ -22,7 +22,9 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/register").permitAll()
+                .authorizeRequests()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/").permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();

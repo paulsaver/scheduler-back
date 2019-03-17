@@ -32,7 +32,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task insertTask(Task task) {
+    public Task createTask(Task task) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         log.debug("Username "+ name + " try to insert task");
