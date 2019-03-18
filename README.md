@@ -20,3 +20,13 @@ Backend part of web app Scheduler.
 5) Change ```Running Application Update Policies``` on Update to rebuild on lost focus
 
 6) ```CTRL+F9``` to update project
+
+# Lombok support
+
+1) Install lombok plugin and restart an IDEA
+
+2) Find ```Annotation Processors``` in settings and mark ```Enable annotation processing```
+
+# Swagger
+
+Swagger2 documentation avaliable on {server.url}:3000/swagger-ui.html
