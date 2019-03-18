@@ -13,8 +13,9 @@ Backend part of web app Scheduler.
 ```
       or add into dependencies in build.gradle :
 ```
-compile("org.springframework.boot:spring-boot-devtools")
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
 ```
+
 
 2) ```File –> Setting –> Build, Execution, Deployment –> Compiler ```  mark Build project automatically
 

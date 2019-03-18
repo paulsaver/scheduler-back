@@ -21,7 +21,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: '2.1.2.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.2.RELEASE'
-   
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+
     compile("org.springframework.boot:spring-boot-starter-web")
     compileOnly 'org.projectlombok:lombok:1.18.6'
     annotationProcessor 'org.projectlombok:lombok:1.18.6'
