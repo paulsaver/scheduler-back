@@ -11,6 +11,11 @@ Backend part of web app Scheduler.
       <optional>true</optional>
 </dependency>
 ```
+      or add into dependencies in build.gradle :
+```
+compile("org.springframework.boot:spring-boot-devtools")
+```
+
 2) ```File –> Setting –> Build, Execution, Deployment –> Compiler ```  mark Build project automatically
 
 3) Press SHIFT+CTRL+A  and typing 'registry'
