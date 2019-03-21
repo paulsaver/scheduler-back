@@ -1,11 +1,15 @@
 package com.masleena.scheduler.model;
 
+import com.masleena.scheduler.model.enums.TaskStatuses;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import java.util.Date;
 
@@ -19,8 +23,10 @@ public class Task {
     private String id;
     private String header;
     private String description;
-    @DBRef
-    private TaskStatus taskStatus;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatuses taskStatus;
+
     @DBRef
     private TaskList taskList;
     private String owner;

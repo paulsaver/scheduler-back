@@ -15,16 +15,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableConfigurationProperties
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
+    private final MongoUserDetailsService mongoUserDetailsService;
+
     @Autowired
-    private MongoUserDetailsService mongoUserDetailsService;
+    public SecurityJavaConfig(MongoUserDetailsService mongoUserDetailsService) {
+        this.mongoUserDetailsService = mongoUserDetailsService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/register").permitAll()
-                .antMatchers("/").permitAll()
+                //.antMatchers("/register").permitAll()
+                .antMatchers("/*").permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();

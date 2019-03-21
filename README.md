@@ -3,15 +3,7 @@ Backend part of web app Scheduler.
 
 # Hot Swap Spring Boot application
 
-1) Add into pom.xml:
-```
-<dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <optional>true</optional>
-</dependency>
-```
-      or add into dependencies in build.gradle :
+1) Add into dependencies in build.gradle :
 ```
     compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
 ```
@@ -35,4 +27,4 @@ Backend part of web app Scheduler.
 
 # Swagger
 
-Swagger2 documentation avaliable on {server.url}:3000/swagger-ui.html
+Swagger2 documentation available on {server.url}:3000/swagger-ui.html

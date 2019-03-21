@@ -19,11 +19,15 @@ import static com.masleena.scheduler.utils.RestRequestResponseHelper.*;
 @RestController
 public class RegistrationController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @ApiParam(name = "Register new user")
     @ApiResponse(code = 200,message ="null")

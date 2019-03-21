@@ -17,11 +17,15 @@ import java.util.List;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    @Autowired
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
+
+    private final TaskListRepository taskListRepository;
 
     @Autowired
-    private TaskListRepository taskListRepository;
+    public TaskServiceImpl(TaskRepository taskRepository, TaskListRepository taskListRepository) {
+        this.taskRepository = taskRepository;
+        this.taskListRepository = taskListRepository;
+    }
 
     @Override
     public List<Task> getAllTasks() {

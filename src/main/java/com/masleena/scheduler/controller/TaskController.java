@@ -16,8 +16,12 @@ import io.swagger.annotations.*;
 @RestController
 public class TaskController {
 
+    private final TaskService taskService;
+
     @Autowired
-    private TaskService taskService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @ApiOperation(value = "Get all tasks", notes = "Description")
     @ApiResponse(code = 200,message ="null")
