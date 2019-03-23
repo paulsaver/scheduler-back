@@ -2,6 +2,7 @@ package com.masleena.scheduler.controller;
 
 import com.masleena.scheduler.model.User;
 import com.masleena.scheduler.repositories.UserRepository;
+import com.masleena.scheduler.utils.RestRequestResponseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,11 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
-import static com.masleena.scheduler.utils.RestRequestResponseHelper.*;
 
 @Api(value = "registration", description = "API for User Registration and login.")
 @RestController
-public class RegistrationController {
+public class RegistrationController extends RestRequestResponseController {
 
     private final UserRepository userRepository;
 
