@@ -7,7 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,17 +17,12 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "registration", description = "API for User Registration and login.")
 @RestController
+@AllArgsConstructor
 public class RegistrationController extends RestRequestResponseController {
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @ApiParam(name = "Register new user")
     @ApiResponse(code = 200,message ="null")

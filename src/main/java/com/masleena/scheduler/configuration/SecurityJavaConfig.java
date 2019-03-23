@@ -1,7 +1,7 @@
 package com.masleena.scheduler.configuration;
 
 import com.masleena.scheduler.service.MongoUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,14 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableConfigurationProperties
+@AllArgsConstructor
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     private final MongoUserDetailsService mongoUserDetailsService;
-
-    @Autowired
-    public SecurityJavaConfig(MongoUserDetailsService mongoUserDetailsService) {
-        this.mongoUserDetailsService = mongoUserDetailsService;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
