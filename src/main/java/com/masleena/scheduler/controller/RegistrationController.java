@@ -2,32 +2,27 @@ package com.masleena.scheduler.controller;
 
 import com.masleena.scheduler.model.User;
 import com.masleena.scheduler.repositories.UserRepository;
+import com.masleena.scheduler.utils.RestRequestResponseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 
-import static com.masleena.scheduler.utils.RestRequestResponseHelper.*;
 
 @Api(value = "registration", description = "API for User Registration and login.")
 @RestController
-public class RegistrationController {
+@AllArgsConstructor
+public class RegistrationController extends RestRequestResponseController {
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @ApiParam(name = "Register new user")
     @ApiResponse(code = 200,message ="null")

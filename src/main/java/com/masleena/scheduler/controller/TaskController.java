@@ -2,26 +2,22 @@ package com.masleena.scheduler.controller;
 
 import com.masleena.scheduler.model.Task;
 import com.masleena.scheduler.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.masleena.scheduler.utils.RestRequestResponseController;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.masleena.scheduler.utils.RestRequestResponseHelper.*;
 import io.swagger.annotations.*;
 
 @Api(value = "tasks", description = "API for Tasks.")
 @RestController
-public class TaskController {
+@AllArgsConstructor
+public class TaskController extends RestRequestResponseController {
 
     private final TaskService taskService;
-
-    @Autowired
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
 
     @ApiOperation(value = "Get all tasks", notes = "Description")
     @ApiResponse(code = 200,message ="null")

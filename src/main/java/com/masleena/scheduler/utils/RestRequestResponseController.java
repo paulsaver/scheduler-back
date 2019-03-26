@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
-public class RestRequestResponseHelper {
+public abstract class RestRequestResponseController {
 
     public static  <T> ResponseEntity<T> getResponse(T entity, HttpStatus status) {
         return buildResponseEntity(entity, null, status);
